@@ -1,71 +1,71 @@
 # YKS AI RAG
 
-YKS (Yükseköğretim Kurumları Sınavı) öğrencileri için geliştirilmiş, RAG (Retrieval Augmented Generation) tabanlı soru çözüm ve konu anlatım asistanı.
+A RAG (Retrieval Augmented Generation) based assistant for question solving and topic explanation, developed for YKS (Higher Education Institutions Examination) students.
 
-## Özellikler
+## Features
 
-- **Yerel Doküman İşleme**: PDF ve TXT formatındaki ders notlarını ve kitapları işler.
-- **Vektör Arama**: FAISS kullanarak hızlı ve alakalı içerik, formül ve örnek soru bulur.
-- **Akıllı Çözüm**: Google Gemini API (Gemini 2.5) kullanarak adım adım, anlaşılır matematiksel çözümler üretir.
-- **Hızlı ve Hafif**: GPU gerektirmez, CPU üzerinde çalışabilir.
+- **Local Document Processing**: Processes lecture notes and books in PDF and TXT formats.
+- **Vector Search**: Finds relevant content, formulas, and sample questions quickly using FAISS.
+- **Smart Solution**: Generates step-by-step, understandable mathematical solutions using Google Gemini API (Gemini 2.5).
+- **Fast and Lightweight**: Does not require a GPU, can run on CPU.
 
-## Kurulum
+## Installation
 
-1. **Gereksinimleri Yükleyin**
+1. **Install Requirements**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Çevresel Değişkenleri Ayarlayın**
-   `.env.example` dosyasını `.env` olarak kopyalayın ve Gemini API anahtarınızı ekleyin.
+2. **Set Environment Variables**
+   Copy `.env.example` to `.env` and add your Gemini API key.
    ```bash
    copy .env.example .env
    ```
-   `.env` dosyasını açıp `GEMINI_API_KEY` değerini girin.
+   Open `.env` and enter your `GEMINI_API_KEY`.
    
-   Ayrıca `HF_TOKEN` (Hugging Face Token) eklemeniz önerilir (https://huggingface.co/settings/tokens):
+   It is also recommended to add `HF_TOKEN` (Hugging Face Token) (https://huggingface.co/settings/tokens):
    ```
    HF_TOKEN=hf_...
    ```
 
-## Kullanım
+## Usage
 
-### 1. Doküman Ekleme ve İndeksleme
-`documents/` klasörüne PDF veya TXT dosyalarınızı atın. Örnek olarak `konu_anlatimi_ornek.txt` dosyası eklenmiştir.
+### 1. Adding and Indexing Documents
+Place your PDF or TXT files in the `documents/` folder. A sample file `konu_anlatimi_ornek.txt` is included.
 
-İndeksleme işlemini başlatmak için:
+To start indexing:
 ```bash
 python -m ingest.ingest_documents
 ```
-Bu işlem dokümanları parçalara böler (chunking), embedding'lerini çıkarır ve `index/` klasörüne kaydeder.
+This process splits documents into chunks, generates embeddings, and saves them to the `index/` folder.
 
-### 2. Backend'i Başlatma
-API sunucusunu başlatın:
+### 2. Starting the Backend
+Start the API server:
 ```bash
 uvicorn app.main:app --reload
 ```
-Sunucu `http://localhost:8000` adresinde çalışacaktır.
+The server will run at `http://localhost:8000`.
 
-### 3. Soru Sorma
-API çalışırken bir POST isteği göndererek soru sorabilirsiniz.
+### 3. Asking Questions
+You can ask questions by sending a POST request while the API is running.
 
-**Örnek İstek (Curl):**
+**Example Request (Curl):**
 ```bash
-curl -X POST "http://localhost:8000/ask" -H "Content-Type: application/json" -d "{\"question\": \"x^2 + 5x + 6 = 0 kökleri nedir?\"}"
+curl -X POST "http://localhost:8000/ask" -H "Content-Type: application/json" -d "{\"question\": \"What are the roots of x^2 + 5x + 6 = 0?\"}"
 ```
 
-**Örnek İstek (Python):**
+**Example Request (Python):**
 ```python
 import requests
 
 url = "http://localhost:8000/ask"
-payload = {"question": "x^2 + 5x + 6 = 0 kökleri nedir?"}
+payload = {"question": "What are the roots of x^2 + 5x + 6 = 0?"}
 response = requests.post(url, json=payload)
 print(response.json())
 ```
 
-## Proje Yapısı
-- `app/`: Ana uygulama kodu (API, Core, Utils)
-- `ingest/`: Doküman işleme script'leri
-- `documents/`: Kaynak dokümanlar
-- `index/`: Vektör veritabanı dosyaları
+## Project Structure
+- `app/`: Main application code (API, Core, Utils)
+- `ingest/`: Document processing scripts
+- `documents/`: Source documents
+- `index/`: Vector database files
