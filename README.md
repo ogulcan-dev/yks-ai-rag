@@ -64,8 +64,6 @@ response = requests.post(url, json=payload)
 print(response.json())
 ```
 
-Swagger UI üzerinden test etmek için tarayıcınızda `http://localhost:8000/docs` adresine gidebilirsiniz.
-
 ## Proje Yapısı
 - `app/`: Ana uygulama kodu (API, Core, Utils)
 - `ingest/`: Doküman işleme script'leri
