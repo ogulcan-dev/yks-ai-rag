@@ -1,0 +1,36 @@
+İkinci Dereceden Denklemler
+a, b ve c gerçel sayılar ve a ≠ 0 olmak üzere,
+ax^2 + bx + c = 0
+ifadesine ikinci dereceden bir bilinmeyenli denklem denir.
+
+Diskiriminant (∆) Yöntemi
+ax^2 + bx + c = 0 denkleminin köklerini bulmak için ∆ = b^2 - 4ac formülü kullanılır.
+
+Durum 1: ∆ > 0 ise denklemin birbirinden farklı iki gerçel kökü vardır.
+x1 = (-b - √∆) / 2a
+x2 = (-b + √∆) / 2a
+
+Durum 2: ∆ = 0 ise denklemin birbirine eşit (çakışık) iki gerçel kökü vardır.
+x1 = x2 = -b / 2a
+
+Durum 3: ∆ < 0 ise denklemin gerçel kökü yoktur. Kökler karmaşık sayılardır.
+
+Örnek Soru:
+x^2 + 5x + 6 = 0 denkleminin çözüm kümesini bulunuz.
+
+Çözüm:
+a = 1, b = 5, c = 6
+∆ = b^2 - 4ac
+∆ = 5^2 - 4 * 1 * 6
+∆ = 25 - 24
+∆ = 1
+
+∆ > 0 olduğu için iki farklı kök vardır.
+x1 = (-5 - 1) / 2 = -3
+x2 = (-5 + 1) / 2 = -2
+Ç.K. = {-3, -2}
+
+Kökler ile Katsayılar Arasındaki Bağıntılar
+ax^2 + bx + c = 0 denkleminin kökleri x1 ve x2 olsun.
+Kökler Toplamı: x1 + x2 = -b/a
+Kökler Çarpımı: x1 * x2 = c/a
