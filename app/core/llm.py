@@ -25,6 +25,9 @@ Kurallar:
 - En sonda "Cevap:" şeklinde sonucu belirt
 - Türkçe cevap ver
 - YKS öğrencisine uygun anlaşılır bir dil kullan
+- Sadece sana verilen bağlamı kullan
+- Dokümanlarda olmayan bir şey sorulursa bilmiyorum diye cevap ver
+- Müfredata uygun cevaplar ver
 """
         
         user_prompt = f"""{system_prompt}
