@@ -6,7 +6,7 @@ YKS (Yükseköğretim Kurumları Sınavı) öğrencileri için geliştirilmiş, 
 
 - **Yerel Doküman İşleme**: PDF ve TXT formatındaki ders notlarını ve kitapları işler.
 - **Vektör Arama**: FAISS kullanarak hızlı ve alakalı içerik, formül ve örnek soru bulur.
-- **Akıllı Çözüm**: Google Gemini API (Gemini 1.5) kullanarak adım adım, anlaşılır matematiksel çözümler üretir.
+- **Akıllı Çözüm**: Google Gemini API (Gemini 2.5) kullanarak adım adım, anlaşılır matematiksel çözümler üretir.
 - **Hızlı ve Hafif**: GPU gerektirmez, CPU üzerinde çalışabilir.
 
 ## Kurulum

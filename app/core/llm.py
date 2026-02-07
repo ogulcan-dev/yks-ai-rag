@@ -9,7 +9,7 @@ class LLMClient:
             raise ValueError("GEMINI_API_KEY environment variable is not set.")
         
         self.client = genai.Client(api_key=self.api_key)
-        self.model_id = ""
+        self.model_id = "gemini-2.5-flash"
 
     def generate_answer(self, context: str, question: str) -> str:
         """
@@ -28,6 +28,8 @@ Kurallar:
 - Sadece sana verilen bağlamı kullan
 - Dokümanlarda olmayan bir şey sorulursa bilmiyorum diye cevap ver
 - Müfredata uygun cevaplar ver
+- Örneğin dökümanlarında limitle alaklı bir tanım yok, o yüzden ona bilmiyorum diye cevap ver
+- Bilmediğin bir şey sorulduğunda sona Cevap: şeklinde bir şey ekleme.
 """
         
         user_prompt = f"""{system_prompt}
