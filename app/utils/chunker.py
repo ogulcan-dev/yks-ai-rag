@@ -1,12 +1,13 @@
 from typing import Generator
 
+CHAR_PER_TOKEN = 4
+
 def chunk_text(text: str, chunk_size: int = 600, overlap: int = 100) -> Generator[str, None, None]:
     """
     Split text into chunks of approximately `chunk_size` tokens (words/characters approximation)
     with `overlap`. Yields chunks one by one to save memory.
     """
     
-    CHAR_PER_TOKEN = 4
     chunk_char_size = chunk_size * CHAR_PER_TOKEN
     overlap_char_size = overlap * CHAR_PER_TOKEN
     

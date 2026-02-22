@@ -1,6 +1,5 @@
 import os
 from google import genai
-from typing import List
 
 class LLMClient:
     def __init__(self):

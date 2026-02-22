@@ -1,9 +1,10 @@
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
 from app.core.vectorstore import VectorStore
 from app.core.embeddings import EmbeddingModel
 from app.core.llm import LLMClient
+from app.api.deps import get_vector_store, get_embedding_model, get_llm_client
 
 router = APIRouter()
 
@@ -14,30 +15,18 @@ class AskResponse(BaseModel):
     answer: str
     sources: List[str]
 
-# Global instances (lazy loading could be better but keeping it simple)
-# We initialize them at module level or via dependency injection.
-# For simplicity, we'll instantiate them here but load index on startup in main if needed,
-# or just lazily here.
-
-vector_store = VectorStore()
-# Verify index exists
-if not vector_store.load():
-    print("WARNING: Index not found. Please run ingest/ingest_documents.py first.")
-
-embedding_model = EmbeddingModel()
-llm_client = None
-try:
-    llm_client = LLMClient()
-except Exception as e:
-    print(f"WARNING: LLM Client could not be initialized (API Key might be missing): {e}")
-
 @router.post("/ask", response_model=AskResponse)
-async def ask(request: AskRequest):
+async def ask(
+    request: AskRequest,
+    vector_store: VectorStore = Depends(get_vector_store),
+    embedding_model: EmbeddingModel = Depends(get_embedding_model),
+    llm_client: LLMClient | None = Depends(get_llm_client)
+):
     if not llm_client:
         raise HTTPException(status_code=500, detail="LLM Client could not be initialized. Check API Key.")
     
     if not vector_store.index:
-         # Try loading again just in case
+        # Try loading again just in case
         if not vector_store.load():
             raise HTTPException(status_code=500, detail="Vector index not found. Please upload documents and run the ingest script.")
 

@@ -1,8 +1,11 @@
+import logging
 import os
 import faiss
 import numpy as np
 import pickle
 from typing import List, Dict, Any, Tuple
+
+logger = logging.getLogger(__name__)
 
 class VectorStore:
     def __init__(self, index_path: str = "index/faiss.index", metadata_path: str = "index/metadata.pkl"):
@@ -46,15 +49,15 @@ class VectorStore:
         faiss.write_index(self.index, self.index_path)
         with open(self.metadata_path, "wb") as f:
             pickle.dump(self.metadata, f)
-        print(f"Index saved to {self.index_path}")
-        print(f"Metadata saved to {self.metadata_path}")
+        logger.info(f"Index saved to {self.index_path}")
+        logger.info(f"Metadata saved to {self.metadata_path}")
 
     def load(self):
         """
         Load index and metadata from disk.
         """
         if not os.path.exists(self.index_path) or not os.path.exists(self.metadata_path):
-            print("Index or metadata file not found.")
+            logger.warning("Index or metadata file not found.")
             return False
 
         self.index = faiss.read_index(self.index_path)

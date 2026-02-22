@@ -1,9 +1,7 @@
 from dotenv import load_dotenv
-import os
-
-# Load env variables first!
 load_dotenv()
 
+import uvicorn
 from fastapi import FastAPI
 from app.api import ask
 
@@ -20,5 +18,4 @@ def root():
     return {"message": "Welcome to YKS AI RAG API. Use the /ask endpoint."}
 
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
